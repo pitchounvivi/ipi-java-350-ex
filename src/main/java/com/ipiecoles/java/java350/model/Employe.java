@@ -107,6 +107,7 @@ public class Employe {
         ) * tempsPartiel);
     }
 
+
     /**
      * Calcul de la prime annuelle selon la règle :
      * Pour les managers : Prime annuelle de base bonnifiée par l'indice prime manager
