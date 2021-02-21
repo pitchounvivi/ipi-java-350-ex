@@ -189,4 +189,34 @@ public class EmployeTest {
     //et relancer le plugin pitest ==> si tout ok message build ok
 
 
+    ///////////////////////////////////////ZONE de l'évalVIVI
+    //TDD
+    //liste idée
+    //% et salaire null
+    //% =0
+    //simpleaugmentation
+    //salairemax2chiffreapresvirgule
+    //% négatif
+    //?? test paramétré avec des tests inférieurs salaire de base et % négatif
+    //
+    //
+    @Test // simple augmentation 10%
+    public void testaugmenterSalaireSimpleAugmentation(){
+        // Given
+        Employe employe = new Employe();
+        employe.setSalaire(1000.00); //entreprise.SALAIRE_BASE = 1521.22, augmentation 10% => 1673.342
+        Double pourcentage = 0.1; // augmentation 10%
+
+        //When
+        employe.augmenterSalaire(pourcentage);
+
+        //Then
+        Assertions.assertThat(employe.getSalaire()).isEqualTo(1100);
+    }
+
+
+
+
+
+
 }
