@@ -190,7 +190,7 @@ public class EmployeTest {
     //et relancer le plugin pitest ==> si tout ok message build ok
 
 
-    ///////////////////////////////////////ZONE de l'évalVIVI
+    ///////////////////////////////////////ZONE de l'évalVIVI///////////////////////////////////////////////////////////
     //TDD
     //liste idée
     //simpleaugmentation
@@ -244,5 +244,19 @@ public class EmployeTest {
         Assertions.assertThat(employe.getSalaire()).isEqualTo(1673.342);
     }
 
+    // TU : salaire = zéro traitement idem que si null
+    @Test //entreprise.SALAIRE_BASE = 1521.22, augmentation 10% => 1673.342
+    public void testAugmenterSalaireSiSalaireAZéroFaireCalculAvecUnSalaireBaseEntreprise(){
+        // Given
+        Employe employe = new Employe();
+        employe.setSalaire(0.0);
+        Double pourcentage = 0.1;
+
+        //When
+        employe.augmenterSalaire(pourcentage);
+
+        //Then
+        Assertions.assertThat(employe.getSalaire()).isEqualTo(1673.342);
+    }
 
 }
