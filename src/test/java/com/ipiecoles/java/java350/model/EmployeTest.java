@@ -193,13 +193,11 @@ public class EmployeTest {
     ///////////////////////////////////////ZONE de l'évalVIVI///////////////////////////////////////////////////////////
     //TDD
     //
-    //
     //liste idée
-    //simpleaugmentation
-    //% ou salaire null
-    //% ou salaire = 0
-    //salairemax2chiffreapresvirgule
-    //% négatif
+    //simpleAugmentation
+    //salaire : null ou 0
+    //% : 0 ou négatif ou null
+    //salaire2ChiffreApresVirgule
     //?? test paramétré avec des tests inférieurs salaire de base et % négatif
     //
     //
@@ -274,6 +272,19 @@ public class EmployeTest {
 
         //Then
         Assertions.assertThat(employe.getSalaire()).isEqualTo(1521.22);
+    }
+
+    // TU : pourcentage = négatif
+    @Test //entreprise.SALAIRE_BASE = 1521.22, pourcentage -10% => 1369.098
+    public void testAugmenterSalaireSiPourcentageNégatif() throws EmployeException{
+        // Given
+        Employe employe = new Employe();
+        employe.setSalaire(1000.0);
+        Double pourcentage = -0.1;
+
+        //Then
+        Assertions.assertThatThrownBy(() -> employe.augmenterSalaire(pourcentage)).hasMessage("ERREUR : le pourcentage est négatif");
+
     }
 
 

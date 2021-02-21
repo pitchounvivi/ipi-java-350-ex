@@ -151,6 +151,10 @@ public class Employe {
             salaire = Entreprise.SALAIRE_BASE;
         }
 
+        if (pourcentage < 0){
+            throw new EmployeException("ERREUR : le pourcentage est négatif");
+        }
+
         this.salaire += this.getSalaire()*pourcentage;
     }
 
