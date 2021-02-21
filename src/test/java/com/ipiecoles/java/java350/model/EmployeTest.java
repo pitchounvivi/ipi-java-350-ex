@@ -193,9 +193,9 @@ public class EmployeTest {
     ///////////////////////////////////////ZONE de l'évalVIVI
     //TDD
     //liste idée
+    //simpleaugmentation
     //% et salaire null
     //% =0
-    //simpleaugmentation
     //salairemax2chiffreapresvirgule
     //% négatif
     //?? test paramétré avec des tests inférieurs salaire de base et % négatif
@@ -215,19 +215,34 @@ public class EmployeTest {
         Assertions.assertThat(employe.getSalaire()).isEqualTo(1100);
     }
 
-    // TU : salaire = null
-    @Test
-    public void testAugmenterSalaireAvecSalaireNull() throws EmployeException{
+//    // TU : salaire = null et une gestion d'exception
+//    @Test
+//    public void testAugmenterSalaireAvecSalaireNull() throws EmployeException{
+//        // Given
+//        Employe employe = new Employe();
+//        employe.setSalaire(null);
+//        Double pourcentage = 0.1;
+//
+//        //Then
+//        Assertions.assertThatThrownBy(() -> employe.augmenterSalaire(pourcentage)).hasMessage("ERREUR : le salaire est null");
+//
+//    }
+
+    // Tu : salaire = null, j'ai modifié la méthode car après réflexion,
+    // il me semble qu'il vaut mieux que la méthode attribut le salaire de base s'il n'y a pas de salaire
+    @Test //entreprise.SALAIRE_BASE = 1521.22, augmentation 10% => 1673.342
+    public void testAugmenterSalaireSiSalaireNullFaireCalculAvecUnSalaireBaseEntreprise(){
         // Given
         Employe employe = new Employe();
         employe.setSalaire(null);
         Double pourcentage = 0.1;
 
+        //When
+        employe.augmenterSalaire(pourcentage);
+
         //Then
-        Assertions.assertThatThrownBy(() -> employe.augmenterSalaire(pourcentage)).hasMessage("ERREUR : le salaire est null");
-
+        Assertions.assertThat(employe.getSalaire()).isEqualTo(1673.342);
     }
-
 
 
 }

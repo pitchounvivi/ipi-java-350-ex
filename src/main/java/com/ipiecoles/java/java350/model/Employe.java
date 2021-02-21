@@ -146,10 +146,9 @@ public class Employe {
     }
 
     //Augmenter salaire
-    public void augmenterSalaire(double pourcentage) throws EmployeException{
+    public void augmenterSalaire(double pourcentage){
         if (salaire == null){
-            throw new EmployeException("ERREUR : le salaire est null");
-            //salaire = Entreprise.SALAIRE_BASE;
+            salaire = Entreprise.SALAIRE_BASE;
         }
 
         this.salaire += this.getSalaire()*pourcentage;
