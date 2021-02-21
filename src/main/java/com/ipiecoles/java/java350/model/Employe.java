@@ -146,7 +146,7 @@ public class Employe {
     }
 
     //Augmenter salaire
-    public void augmenterSalaire(double pourcentage){
+    public void augmenterSalaire(double pourcentage) throws EmployeException{
         if (salaire == null || salaire == 0){
             salaire = Entreprise.SALAIRE_BASE;
         }

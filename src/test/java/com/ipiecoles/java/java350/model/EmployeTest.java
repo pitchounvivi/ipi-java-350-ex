@@ -192,10 +192,12 @@ public class EmployeTest {
 
     ///////////////////////////////////////ZONE de l'évalVIVI///////////////////////////////////////////////////////////
     //TDD
+    //
+    //
     //liste idée
     //simpleaugmentation
-    //% et salaire null
-    //% =0
+    //% ou salaire null
+    //% ou salaire = 0
     //salairemax2chiffreapresvirgule
     //% négatif
     //?? test paramétré avec des tests inférieurs salaire de base et % négatif
@@ -231,7 +233,7 @@ public class EmployeTest {
     // Tu : salaire = null, j'ai modifié la méthode car après réflexion,
     // il me semble qu'il vaut mieux que la méthode attribut le salaire de base s'il n'y a pas de salaire
     @Test //entreprise.SALAIRE_BASE = 1521.22, augmentation 10% => 1673.342
-    public void testAugmenterSalaireSiSalaireNullFaireCalculAvecUnSalaireBaseEntreprise(){
+    public void testAugmenterSalaireSiSalaireNullFaireCalculAvecUnSalaireBaseEntreprise() throws EmployeException{
         // Given
         Employe employe = new Employe();
         employe.setSalaire(null);
@@ -246,7 +248,7 @@ public class EmployeTest {
 
     // TU : salaire = zéro traitement idem que si null
     @Test //entreprise.SALAIRE_BASE = 1521.22, augmentation 10% => 1673.342
-    public void testAugmenterSalaireSiSalaireAZéroFaireCalculAvecUnSalaireBaseEntreprise(){
+    public void testAugmenterSalaireSiSalaireAZéroFaireCalculAvecUnSalaireBaseEntreprise() throws EmployeException{
         // Given
         Employe employe = new Employe();
         employe.setSalaire(0.0);
@@ -258,5 +260,21 @@ public class EmployeTest {
         //Then
         Assertions.assertThat(employe.getSalaire()).isEqualTo(1673.342);
     }
+
+    // TU : pourcentage = 0
+    @Test //entreprise.SALAIRE_BASE = 1521.22
+    public void testAugmenterSalaireSiPourcentageAZéro() throws EmployeException{
+        // Given
+        Employe employe = new Employe();
+        employe.setSalaire(null);
+        Double pourcentage = 0d;
+
+        //When
+        employe.augmenterSalaire(pourcentage);
+
+        //Then
+        Assertions.assertThat(employe.getSalaire()).isEqualTo(1521.22);
+    }
+
 
 }
