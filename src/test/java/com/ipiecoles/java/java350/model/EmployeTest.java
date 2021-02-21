@@ -1,5 +1,6 @@
 package com.ipiecoles.java.java350.model;
 
+import com.ipiecoles.java.java350.exception.EmployeException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -201,7 +202,7 @@ public class EmployeTest {
     //
     //
     @Test // simple augmentation 10%
-    public void testaugmenterSalaireSimpleAugmentation(){
+    public void testAugmenterSalaireSimpleAugmentation() throws EmployeException {
         // Given
         Employe employe = new Employe();
         employe.setSalaire(1000.00); //entreprise.SALAIRE_BASE = 1521.22, augmentation 10% => 1673.342
@@ -214,8 +215,18 @@ public class EmployeTest {
         Assertions.assertThat(employe.getSalaire()).isEqualTo(1100);
     }
 
+    // TU : salaire = null
+    @Test
+    public void testAugmenterSalaireAvecSalaireNull() throws EmployeException{
+        // Given
+        Employe employe = new Employe();
+        employe.setSalaire(null);
+        Double pourcentage = 0.1;
 
+        //Then
+        Assertions.assertThatThrownBy(() -> employe.augmenterSalaire(pourcentage)).hasMessage("ERREUR : le salaire est null");
 
+    }
 
 
 
