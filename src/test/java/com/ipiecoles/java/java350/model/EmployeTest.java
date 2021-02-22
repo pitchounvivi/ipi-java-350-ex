@@ -13,7 +13,7 @@ public class EmployeTest {
 
     /////////////////////////////////////////Test Unitaire
     @Test // un test basique
-    public void testGetNombreAnneeAncienneteAvecDateEmbaucheNull(){
+    void testGetNombreAnneeAncienneteAvecDateEmbaucheNull(){
         // Given
         Employe employe = new Employe();
         employe.setDateEmbauche(null);
@@ -26,7 +26,7 @@ public class EmployeTest {
     }
 
     @Test // un test basique
-    public void testGetNombreAnneeAncienneteAvecDateEmbaucheInférieurNow(){
+    void testGetNombreAnneeAncienneteAvecDateEmbaucheInférieurNow(){
         // Given
         Employe employe = new Employe("Doe", "John", "T12345", LocalDate.now().minusYears(6), 1500d, 1, 1.0);
 
@@ -39,7 +39,7 @@ public class EmployeTest {
 
 
     @Test // un test basique
-    public void testGetNombreAnneeAncienneteAvecDateEmbaucheSupérieurNow(){
+    void testGetNombreAnneeAncienneteAvecDateEmbaucheSupérieurNow(){
         // Given
         Employe employe = new Employe("Doe", "John", "T12345", LocalDate.now().plusYears(6), 1500d, 1, 1.0);
 
@@ -52,7 +52,7 @@ public class EmployeTest {
 
 
     @Test
-    public void testGetNbAnneeAncienneteDateEmbaucheNow(){
+    void testGetNbAnneeAncienneteDateEmbaucheNow(){
         //Given
         Employe employe = new Employe("Doe", "John", "T12345",
                 LocalDate.now(), 1500d, 1, 1.0);
@@ -84,7 +84,7 @@ public class EmployeTest {
 
 
     @Test //version TU simple
-    public void testGetPrimeAnnuellePourUnEmployeATempsPartiel(){
+    void testGetPrimeAnnuellePourUnEmployeATempsPartiel(){
         Employe employe = new Employe();
         employe.setDateEmbauche(LocalDate.now());
         employe.setTempsPartiel(0.5);
@@ -97,7 +97,7 @@ public class EmployeTest {
     }
 
     @Test // exemple correction de TU
-    public void testGetPrimeAnnuelle(){
+    void testGetPrimeAnnuelle(){
         //Given
         Integer performance = 1; //voir dans la classe correspondant
         String matricule = "T12345";
@@ -144,7 +144,7 @@ public class EmployeTest {
             "2, 'T12345', 1.0, 1, 2400",  //pour tester le cas du code zombie (ligne 99)
             "1, 'M12345', 1.0, 3, 2000",  //pour le code zombie de la (ligne 103)
     })
-    public void testGetPrimeAnnuelleVersionTestPrepareCasNormaux(
+    void testGetPrimeAnnuelleVersionTestPrepareCasNormaux(
             Integer performance, String matricule, Double tauxActivite, Long nbAnneeAnciennete, Double primeAttendue){
 
         //Given, When, Then
@@ -159,7 +159,7 @@ public class EmployeTest {
     ////Un test limite
     //Les tests limites doivent être plutôt géré en TU
     @Test
-    public void testGetPrimeAnnuelleMatriculeNull(){
+    void testGetPrimeAnnuelleMatriculeNull(){
 
         //Given, When, Then
         Employe employe = new Employe("Doe", "John", null,
@@ -202,7 +202,7 @@ public class EmployeTest {
     //
     //
     @Test // simple augmentation 10% => 1673.342
-    public void testAugmenterSalaireSimpleAugmentation() throws EmployeException {
+    void testAugmenterSalaireSimpleAugmentation() throws EmployeException {
         // Given
         Employe employe = new Employe();
         employe.setSalaire(1000.00); //entreprise.SALAIRE_BASE = 1521.22, augmentation 10% => 1673.342
@@ -217,7 +217,7 @@ public class EmployeTest {
 
     // Tu : salaire = null
     @Test //entreprise.SALAIRE_BASE = 1521.22, augmentation 10% => 1673.342
-    public void testAugmenterSalaireSiSalaireNullFaireCalculAvecUnSalaireBaseEntreprise() throws EmployeException{
+    void testAugmenterSalaireSiSalaireNullFaireCalculAvecUnSalaireBaseEntreprise() throws EmployeException{
         // Given
         Employe employe = new Employe();
         employe.setSalaire(null);
@@ -232,7 +232,7 @@ public class EmployeTest {
 
     // TU : salaire = zéro traitement idem que si null
     @Test //entreprise.SALAIRE_BASE = 1521.22, augmentation 10% => 1673.342
-    public void testAugmenterSalaireSiSalaireAZéroFaireCalculAvecUnSalaireBaseEntreprise() throws EmployeException{
+    void testAugmenterSalaireSiSalaireAZéroFaireCalculAvecUnSalaireBaseEntreprise() throws EmployeException{
         // Given
         Employe employe = new Employe();
         employe.setSalaire(0.0);
@@ -247,7 +247,7 @@ public class EmployeTest {
 
     // TU : pourcentage = 0
     @Test //entreprise.SALAIRE_BASE = 1521.22
-    public void testAugmenterSalaireSiPourcentageAZéro() throws EmployeException{
+    void testAugmenterSalaireSiPourcentageAZéro() throws EmployeException{
         // Given
         Employe employe = new Employe();
         employe.setSalaire(null);
@@ -262,7 +262,7 @@ public class EmployeTest {
 
     // TU : pourcentage = négatif => gestion d'une exception
     @Test //entreprise.SALAIRE_BASE = 1521.22, pourcentage -10% => 1369.098 ==> exception on peut pas faire une augmentation avec un % négatif
-    public void testAugmenterSalaireSiPourcentageNégatif() throws EmployeException{
+    void testAugmenterSalaireSiPourcentageNégatif() throws EmployeException{
         // Given
         Employe employe = new Employe();
         employe.setSalaire(1000.0);
@@ -276,7 +276,7 @@ public class EmployeTest {
 
     // TU : salaire2ChiffreApresVirgule
     @Test //entreprise.SALAIRE_BASE = 1521.22, pourcentage 10% => 1673.34
-    public void testAugmenterSalaireSalaireDeuxChiffresMax() throws EmployeException{
+    void testAugmenterSalaireSalaireDeuxChiffresMax() throws EmployeException{
         // Given
         Employe employe = new Employe();
         employe.setSalaire(1521.22);
@@ -298,7 +298,7 @@ public class EmployeTest {
             "'2022-01-01', 10", // (365 - 218 - 105 - 25 - 7 = 10)
             "'2032-01-01', 11" // (366 - 218 - 104 - 25 - 7 = 12)
     })
-    public void testGetNbRtt(LocalDate date, Integer nbRtt){
+    void testGetNbRtt(LocalDate date, Integer nbRtt){
         Employe employe = new Employe("Doe", "John", null,
                 LocalDate.now(), 1500d, 1, 1.0);
 
