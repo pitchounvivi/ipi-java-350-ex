@@ -301,6 +301,9 @@ class EmployeServiceTest {
         Long caTraite = 1l;
         Long objectifCa = 1l;
 
+        //On simule la recherche par matricule qui ne renvoie pas de résultat
+        Mockito.when(employeRepository.findByMatricule("C1001")).thenReturn(null);
+
         Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial(matricule, caTraite,objectifCa)).hasMessage("Le matricule " + matricule + " n'existe pas !");
     }
 
@@ -332,7 +335,6 @@ class EmployeServiceTest {
 
         Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial(matricule, caTraite,objectifCa)).hasMessage("Le matricule ne peut être null et doit commencer par un C !");
     }
-
 
 
     ////TU cas 2
