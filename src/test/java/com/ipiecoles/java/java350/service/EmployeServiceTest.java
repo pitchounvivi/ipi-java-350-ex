@@ -323,11 +323,10 @@ class EmployeServiceTest {
         }
     }
 
-    ////TU matricule == null
-    //autre façon de procéder
+    ////TU matricule == != C
     @Test
-    public void testCalculPerformanceCommercialMatriculeNullSansTryCatch() throws EmployeException {
-        String matricule = null;
+    public void testCalculPerformanceCommercialMatriculeSansC() throws EmployeException {
+        String matricule = "T0001";
         Long caTraite = 1l;
         Long objectifCa = 1l;
 
@@ -335,7 +334,6 @@ class EmployeServiceTest {
     }
 
 
-    ////TU matricule != C
 
     ////TU cas 2
 
