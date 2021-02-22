@@ -442,6 +442,41 @@ class EmployeServiceTest {
     }
 
     ////TU cas 4
+    @Test //caTraite <= objectifCa*1.2 (=120)
+    public void testCalculPerformanceCas4CatraiteInfObjectifCa() throws EmployeException {
+        Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
+
+        employeService.calculPerformanceCommercial("C0002", 50l, 100l);
+        ArgumentCaptor<Employe> employe = ArgumentCaptor.forClass(Employe.class);
+
+        Mockito.verify(employeRepository, Mockito.times(1)).save(employe.capture());
+        Assertions.assertThat(employe.getValue().getPerformance()).isEqualTo(2);
+    }
+
+    ////TU cas 4
+    @Test //caTraite > objectifCa*1.05 (=105)
+    public void testCalculPerformanceCas4CatraiteSupObjectifCa() throws EmployeException {
+        Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
+
+        employeService.calculPerformanceCommercial("C0002", 130l, 100l);
+        ArgumentCaptor<Employe> employe = ArgumentCaptor.forClass(Employe.class);
+
+        Mockito.verify(employeRepository, Mockito.times(1)).save(employe.capture());
+        Assertions.assertThat(employe.getValue().getPerformance()).isEqualTo(7);
+    }
+
+    ////TU cas 4
+    @Test //caTraite > objectifCa*1.05 (=105) ET caTraite <= objectifCa*1.2 (=120)
+    public void testCalculPerformanceCas4LeETDuIf() throws EmployeException {
+        Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
+
+        employeService.calculPerformanceCommercial("C0002", 110l, 100l);
+        ArgumentCaptor<Employe> employe = ArgumentCaptor.forClass(Employe.class);
+
+        Mockito.verify(employeRepository, Mockito.times(1)).save(employe.capture());
+        Assertions.assertThat(employe.getValue().getPerformance()).isEqualTo(4);
+    }
+
 
     ////TU cas 5
 
