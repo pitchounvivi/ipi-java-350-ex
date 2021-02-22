@@ -45,7 +45,7 @@ class EmployeRepositoryTest {
     //Pour régler le problème d'étanchéité
     @BeforeEach //à faire avant chaque tests
     @AfterEach //a faire après chaque tests
-    public void purgeBDD(){//Nom setUp arbitraire
+    void purgeBDD(){//Nom setUp arbitraire
             employeRepository.deleteAll();
         }
     //==> contrairement à ceux en All qui se font avant/après avoir effectués tous les tests
@@ -53,7 +53,7 @@ class EmployeRepositoryTest {
 
     //TU (<= même si on fait un peu d'insertion)  pour tester le dernier numéro de matricule enregistré en bdd
     @Test
-    public void testFindLastMatriculeUnEmploye(){
+    void testFindLastMatriculeUnEmploye(){
         //given
         //insert des données en base
         employeRepository.save(new Employe("Doe", "John", "T012345", LocalDate.now(), 1500d, 1, 1.0));
@@ -73,7 +73,7 @@ class EmployeRepositoryTest {
     //TU : ATTENTION PROBLEME D'ETANCHEITE DES TESTS car si on teste les 2 méthodes la deuxième plante car pour lui il y a des employé en bdd
     //il y a une sorte d'héritage des méthodes précédentes
     @Test
-    public void testFindLastMatricule0Employe(){
+    void testFindLastMatricule0Employe(){
         //given
         //insert des données en base
 
@@ -87,7 +87,7 @@ class EmployeRepositoryTest {
 
     //test avec des matricule très différentes permet de vérifier que l'on se base que sur la partie numérique
     @Test
-    public void testFindLastMatriculeNEmploye(){
+    void testFindLastMatriculeNEmploye(){
         //given
         //insert des données en base
         employeRepository.save(new Employe("Doe", "John", "T12345", LocalDate.now(), 1500d, 1, 1.0));
