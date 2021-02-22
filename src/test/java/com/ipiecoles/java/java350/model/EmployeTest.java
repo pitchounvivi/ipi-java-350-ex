@@ -297,6 +297,8 @@ class EmployeTest {
             "'2021', 10", // (365 - 218 - 104 - 25 - 7 = 11)
             "'2022', 10", // (365 - 218 - 105 - 25 - 7 = 10)
             "'2032', 11", // (366 - 218 - 104 - 25 - 7 = 12)
+            "'2026', 9", // pour tester le jeudi
+            "'2016', 9" // pour tester le vendredi (pour cela il a fallut ajouter la date de pâque dans Entreprise)
     })
     void testGetNbRtt(Integer dateReference, Integer nbRttAttendu){
         Employe employe = new Employe("Doe", "John", null,
