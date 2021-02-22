@@ -368,8 +368,17 @@ class EmployeServiceTest {
         Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial(matricule, caTraite,objectifCa)).hasMessage("Le matricule ne peut être null et doit commencer par un C !");
     }
 
-
     ////TU cas 2
+    @Test
+    public void testCalculPerformanceCas2() throws EmployeException {
+        Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
+
+        employeService.calculPerformanceCommercial("C0002", 1l, 2l);
+        ArgumentCaptor<Employe> employe = ArgumentCaptor.forClass(Employe.class);
+
+        Mockito.verify(employeRepository, Mockito.times(1)).save(employe.capture());
+        Assertions.assertThat(employe.getValue().getPerformance()).isEqualTo(2);
+    }
 
     ////TU cas 3
 
