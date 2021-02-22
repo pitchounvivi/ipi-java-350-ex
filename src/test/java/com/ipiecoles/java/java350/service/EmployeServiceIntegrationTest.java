@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @SpringBootTest
 class EmployeServiceIntegrationTest {
@@ -28,7 +27,7 @@ class EmployeServiceIntegrationTest {
     private EmployeRepository employeRepository;
 
     @Test
-    public void testEmbauchePremierEmploye() throws EmployeException {
+    void testEmbauchePremierEmploye() throws EmployeException {
         //Given
         String nom = "Doe";
         String prenom = "John";
@@ -60,6 +59,11 @@ class EmployeServiceIntegrationTest {
         Assertions.assertThat(employe.getDateEmbauche()).isEqualTo(LocalDate.now());
         Assertions.assertThat(employe.getMatricule()).isEqualTo("T00001");
     }
+
+
+
+
+
 
 
 }
