@@ -96,6 +96,8 @@ public class Employe {
             case SATURDAY:
                 nbSamediDimanche = nbSamediDimanche + 1;
                 break;
+            default:
+                break;
         }
 
         //nb de j fériée pour l'année en parametre et ça filtre en fonction de combien tombe en semaine
