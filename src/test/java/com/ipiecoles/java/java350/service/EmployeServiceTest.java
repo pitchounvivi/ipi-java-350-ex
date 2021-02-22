@@ -477,13 +477,22 @@ class EmployeServiceTest {
         Assertions.assertThat(employe.getValue().getPerformance()).isEqualTo(4);
     }
 
-
     ////TU cas 5
+    @Test //caTraite > objectifCa*1.2 (=120)
+    public void testCalculPerformanceCas5CatraiteSupObjectifCa() throws EmployeException {
+        Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
+
+        employeService.calculPerformanceCommercial("C0002", 150l, 100l);
+        ArgumentCaptor<Employe> employe = ArgumentCaptor.forClass(Employe.class);
+
+        Mockito.verify(employeRepository, Mockito.times(1)).save(employe.capture());
+        Assertions.assertThat(employe.getValue().getPerformance()).isEqualTo(7);
+    }
 
     ////TU autre cas == perf de base
 
     ////TU perf moyenne
-
+    
 
 }
 
