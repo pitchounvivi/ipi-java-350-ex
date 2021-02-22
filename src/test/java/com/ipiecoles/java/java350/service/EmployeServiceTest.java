@@ -305,7 +305,23 @@ class EmployeServiceTest {
     }
 
     ////TU matricule == null
-    //Mockito.when(employeRepository.findByMatricule(matricule)).thenReturn()
+    @Test
+    public void testCalculPerformanceCommercialMatriculeNull(){
+        String matricule = null;
+        Long caTraite = 1l;
+        Long objectifCa = 1l;
+
+        //When
+        try {
+            employeService.calculPerformanceCommercial(matricule, caTraite,objectifCa);
+            Assertions.fail("embaucheEmploye aurait dû lancer une exception");
+
+        } catch (Exception e){
+            //Then
+            Assertions.assertThat(e).isInstanceOf(EmployeException.class); //on récupère toutes les exceptions
+            Assertions.assertThat(e.getMessage()).isEqualTo("Le matricule ne peut être null et doit commencer par un C !");
+        }
+    }
 
 
     ////TU matricule != C
