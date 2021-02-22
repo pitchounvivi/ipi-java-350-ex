@@ -170,6 +170,19 @@ class EmployeTest {
         Assertions.assertThat(prime).isEqualTo(1000);
     }
 
+    @Test
+    void testGetPrimeAnnuellePerformanceNull(){
+
+        //Given, When, Then
+        Employe employe = new Employe("Doe", "John", "T12345",
+                LocalDate.now().minusYears(0), 2000d, null, 1.0);
+
+        Double prime = employe.getPrimeAnnuelle();
+
+        Assertions.assertThat(prime).isEqualTo(1000); // = primeAnnuelle de Base
+    }
+
+
 
     //////////////////////////////////Test de mutation
     //il s'agit du plugin pitest (dans le pom.xml)
