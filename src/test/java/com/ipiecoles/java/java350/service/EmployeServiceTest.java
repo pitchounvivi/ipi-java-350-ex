@@ -504,5 +504,19 @@ class EmployeServiceTest {
         Assertions.assertThat(employe.getValue().getPerformance()).isLessThan(10);
     }
 
+    ////TU perf moyenne
+    @Test //performanceMoyenne == null
+    public void testCalculPerformancePerformanceMoyenneNull() throws EmployeException {
+        Mockito.when(employeRepository.avgPerformanceWhereMatriculeStartsWith("C")).thenReturn(null);
+        Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
+
+        employeService.calculPerformanceCommercial("C0002", 150l, 100l);
+        ArgumentCaptor<Employe> employe = ArgumentCaptor.forClass(Employe.class);
+
+        Mockito.verify(employeRepository, Mockito.times(1)).save(employe.capture());
+        Assertions.assertThat(employeRepository.avgPerformanceWhereMatriculeStartsWith("C")).isNull();
+        Assertions.assertThat(employe.getValue().getPerformance()).isEqualTo(6);
+    }
+
 }
 
