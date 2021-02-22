@@ -59,7 +59,7 @@ class EmployeTest {
         //When
         Integer anneeAnciennete = employe.getNombreAnneeAnciennete();
         //Then
-        Assertions.assertThat(anneeAnciennete).isEqualTo(0);
+        Assertions.assertThat(anneeAnciennete).isZero();
     }
 
 
