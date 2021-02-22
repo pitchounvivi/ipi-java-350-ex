@@ -323,6 +323,17 @@ class EmployeServiceTest {
         }
     }
 
+    ////TU matricule == null
+    //autre façon de procéder
+    @Test
+    public void testCalculPerformanceCommercialMatriculeNullSansTryCatch() throws EmployeException {
+        String matricule = null;
+        Long caTraite = 1l;
+        Long objectifCa = 1l;
+
+        Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial(matricule, caTraite,objectifCa)).hasMessage("Le matricule ne peut être null et doit commencer par un C !");
+    }
+
 
     ////TU matricule != C
 
