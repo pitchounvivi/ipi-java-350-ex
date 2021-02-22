@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Locale;
-import java.util.Objects;
 
 @Entity
 public class Employe {
@@ -259,26 +258,6 @@ public class Employe {
     public void setTempsPartiel(Double tempsPartiel) {
         this.tempsPartiel = tempsPartiel;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Employe)) return false;
-        Employe employe = (Employe) o;
-        return Objects.equals(id, employe.id) &&
-                Objects.equals(nom, employe.nom) &&
-                Objects.equals(prenom, employe.prenom) &&
-                Objects.equals(matricule, employe.matricule) &&
-                Objects.equals(dateEmbauche, employe.dateEmbauche) &&
-                Objects.equals(salaire, employe.salaire) &&
-                Objects.equals(performance, employe.performance);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nom, prenom, matricule, dateEmbauche, salaire, performance);
-    }
-
 
     @Override
     public String toString() {
