@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Objects;
 
 @Entity
@@ -156,6 +157,10 @@ public class Employe {
         }
 
         this.salaire += this.getSalaire()*pourcentage;
+
+        //Arrondir à 2 chiffres après la virgule
+        String salaireString = String.format(Locale.ROOT,"%.2f",this.salaire);
+        this.salaire = Double.valueOf(salaireString);
     }
 
     public Long getId() {

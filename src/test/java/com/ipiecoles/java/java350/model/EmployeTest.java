@@ -201,7 +201,7 @@ public class EmployeTest {
     //?? test paramétré avec des tests inférieurs salaire de base et % négatif
     //
     //
-    @Test // simple augmentation 10%
+    @Test // simple augmentation 10% => 1673.342
     public void testAugmenterSalaireSimpleAugmentation() throws EmployeException {
         // Given
         Employe employe = new Employe();
@@ -215,21 +215,7 @@ public class EmployeTest {
         Assertions.assertThat(employe.getSalaire()).isEqualTo(1100);
     }
 
-//    // TU : salaire = null et une gestion d'exception
-//    @Test
-//    public void testAugmenterSalaireAvecSalaireNull() throws EmployeException{
-//        // Given
-//        Employe employe = new Employe();
-//        employe.setSalaire(null);
-//        Double pourcentage = 0.1;
-//
-//        //Then
-//        Assertions.assertThatThrownBy(() -> employe.augmenterSalaire(pourcentage)).hasMessage("ERREUR : le salaire est null");
-//
-//    }
-
-    // Tu : salaire = null, j'ai modifié la méthode car après réflexion,
-    // il me semble qu'il vaut mieux que la méthode attribut le salaire de base s'il n'y a pas de salaire
+    // Tu : salaire = null
     @Test //entreprise.SALAIRE_BASE = 1521.22, augmentation 10% => 1673.342
     public void testAugmenterSalaireSiSalaireNullFaireCalculAvecUnSalaireBaseEntreprise() throws EmployeException{
         // Given
@@ -241,7 +227,7 @@ public class EmployeTest {
         employe.augmenterSalaire(pourcentage);
 
         //Then
-        Assertions.assertThat(employe.getSalaire()).isEqualTo(1673.342);
+        Assertions.assertThat(employe.getSalaire()).isEqualTo(1673.34);
     }
 
     // TU : salaire = zéro traitement idem que si null
@@ -256,7 +242,7 @@ public class EmployeTest {
         employe.augmenterSalaire(pourcentage);
 
         //Then
-        Assertions.assertThat(employe.getSalaire()).isEqualTo(1673.342);
+        Assertions.assertThat(employe.getSalaire()).isEqualTo(1673.34);
     }
 
     // TU : pourcentage = 0
@@ -274,8 +260,8 @@ public class EmployeTest {
         Assertions.assertThat(employe.getSalaire()).isEqualTo(1521.22);
     }
 
-    // TU : pourcentage = négatif
-    @Test //entreprise.SALAIRE_BASE = 1521.22, pourcentage -10% => 1369.098
+    // TU : pourcentage = négatif => gestion d'une exception
+    @Test //entreprise.SALAIRE_BASE = 1521.22, pourcentage -10% => 1369.098 ==> exception on peut pas faire une augmentation avec un % négatif
     public void testAugmenterSalaireSiPourcentageNégatif() throws EmployeException{
         // Given
         Employe employe = new Employe();
@@ -284,7 +270,23 @@ public class EmployeTest {
 
         //Then
         Assertions.assertThatThrownBy(() -> employe.augmenterSalaire(pourcentage)).hasMessage("ERREUR : le pourcentage est négatif");
+    }
 
+    // TU : pourcentage = null => abandonné ... test non faisable
+
+    // TU : salaire2ChiffreApresVirgule
+    @Test //entreprise.SALAIRE_BASE = 1521.22, pourcentage 10% => 1673.34
+    public void testAugmenterSalaireSalaireDeuxChiffresMax() throws EmployeException{
+        // Given
+        Employe employe = new Employe();
+        employe.setSalaire(1521.22);
+        Double pourcentage = 0.1;
+
+        //When
+        employe.augmenterSalaire(pourcentage);
+
+        //Then
+        Assertions.assertThat(employe.getSalaire()).isEqualTo(1673.34);
     }
 
 
