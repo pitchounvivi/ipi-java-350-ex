@@ -282,5 +282,46 @@ class EmployeServiceTest {
     }
 
 
+    ///////////////////////////////////////ZONE de l'évalVIVI///////////////////////////////////////////////////////////
+    //TDD calculPerformanceCommercial
+    //
+
+    ////TU caTraite null
+
+    ////TU caTraite < 0
+
+    ////TU objectifCa null
+
+    ////TU objectifCa 0
+
+    ////TU employe == null
+    @Test
+    public void testCalculPerformanceCommercialEmployeNull() throws EmployeException {
+        String matricule = "C1001";
+        Long caTraite = 1l;
+        Long objectifCa = 1l;
+
+        Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial(matricule, caTraite,objectifCa)).hasMessage("Le matricule " + matricule + " n'existe pas !");
+    }
+
+    ////TU matricule == null
+    //Mockito.when(employeRepository.findByMatricule(matricule)).thenReturn()
+
+
+    ////TU matricule != C
+
+    ////TU cas 2
+
+    ////TU cas 3
+
+    ////TU cas 4
+
+    ////TU cas 5
+
+    ////TU autre cas == perf de base
+
+    ////TU perf moyenne
+
+
 }
 
