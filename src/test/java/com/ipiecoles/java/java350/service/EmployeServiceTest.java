@@ -88,7 +88,7 @@ class EmployeServiceTest {
     ////}
     ////////////////////////////////////////////////////////////////////
     @Test //////////Un TU avec mock
-    public void testEmbauchePremierEmploye2() throws EmployeException {
+    void testEmbauchePremierEmploye2() throws EmployeException {
         //Given Pas d'employés en base
         String nom = "Doe";
         String prenom = "John";
@@ -121,7 +121,7 @@ class EmployeServiceTest {
 //Nouvelle méthode adaptée à la méthode du service en void
 
     @Test //////////Un TU avec mock
-    public void testEmbaucheEmployeSupplementaire() throws EmployeException {
+    void testEmbaucheEmployeSupplementaire() throws EmployeException {
         //Given
         String nom = "Doe";
         String prenom = "John";
@@ -157,7 +157,7 @@ class EmployeServiceTest {
     }
 
     @Test //////////Un TU avec mock
-    public void testEmbaucheEmployeTempsPartiel() throws EmployeException {
+    void testEmbaucheEmployeTempsPartiel() throws EmployeException {
         //Given
         String nom = "Doe";
         String prenom = "John";
@@ -193,7 +193,7 @@ class EmployeServiceTest {
     }
 
     @Test //////////Un TU avec mock
-    public void testEmbaucheEmployeTempsDeTravailNull() throws EmployeException {
+    void testEmbaucheEmployeTempsDeTravailNull() throws EmployeException {
         //Given
         String nom = "Doe";
         String prenom = "John";
@@ -230,7 +230,7 @@ class EmployeServiceTest {
 
 
     @Test //////////Un TU avec UNE EXCEPTION
-    public void testEmbaucheEmployeLimiteMatricule() {
+    void testEmbaucheEmployeLimiteMatricule() {
         //Given
         String nom = "Doe";
         String prenom = "John";
@@ -254,7 +254,7 @@ class EmployeServiceTest {
 
 
     @Test //////////Un TU avec UNE EXCEPTION
-    public void testEmbaucheEmployeExisteDeja() throws EmployeException {
+    void testEmbaucheEmployeExisteDeja() throws EmployeException {
         //Given Pas d'employés en base
         String nom = "Doe";
         String prenom = "John";
@@ -288,7 +288,7 @@ class EmployeServiceTest {
 
     ////TU caTraite null
     @Test
-    public void testCalculPerformanceCommercialcaTraiteNull() throws EmployeException {
+    void testCalculPerformanceCommercialcaTraiteNull() throws EmployeException {
         String matricule = "C00001";
         Long caTraite = null;
         Long objectifCa = 1l;
@@ -298,7 +298,7 @@ class EmployeServiceTest {
 
     ////TU caTraite < 0
     @Test
-    public void testCalculPerformanceCommercialcaTraiteInférieurAZero() throws EmployeException {
+    void testCalculPerformanceCommercialcaTraiteInférieurAZero() throws EmployeException {
         String matricule = "C00001";
         Long caTraite = -2l;
         Long objectifCa = 1l;
@@ -308,7 +308,7 @@ class EmployeServiceTest {
 
     ////TU objectifCa null
     @Test
-    public void testCalculPerformanceCommercialObjectifCaNull() throws EmployeException {
+    void testCalculPerformanceCommercialObjectifCaNull() throws EmployeException {
         String matricule = "C00001";
         Long caTraite = 1l;
         Long objectifCa = null;
@@ -318,7 +318,7 @@ class EmployeServiceTest {
 
     ////TU objectifCa < 0
     @Test
-    public void testCalculPerformanceCommercialobjectifCaInferieurAZero() throws EmployeException {
+    void testCalculPerformanceCommercialobjectifCaInferieurAZero() throws EmployeException {
         String matricule = "C00001";
         Long caTraite = 1l;
         Long objectifCa = -2l;
@@ -328,7 +328,7 @@ class EmployeServiceTest {
 
     ////TU employe == null
     @Test
-    public void testCalculPerformanceCommercialEmployeNull() throws EmployeException {
+    void testCalculPerformanceCommercialEmployeNull() throws EmployeException {
         String matricule = "C1001";
         Long caTraite = 1l;
         Long objectifCa = 1l;
@@ -341,7 +341,7 @@ class EmployeServiceTest {
 
     ////TU matricule == null
     @Test
-    public void testCalculPerformanceCommercialMatriculeNull(){
+    void testCalculPerformanceCommercialMatriculeNull(){
         String matricule = null;
         Long caTraite = 1l;
         Long objectifCa = 1l;
@@ -360,7 +360,7 @@ class EmployeServiceTest {
 
     ////TU matricule == != C
     @Test
-    public void testCalculPerformanceCommercialMatriculeSansC() throws EmployeException {
+    void testCalculPerformanceCommercialMatriculeSansC() throws EmployeException {
         String matricule = "T0001";
         Long caTraite = 1l;
         Long objectifCa = 1l;
@@ -370,7 +370,7 @@ class EmployeServiceTest {
 
     ////TU cas 2
     @Test //caTraite < objectifCa*0.95 (=1.9)
-    public void testCalculPerformanceCas2CatraiteInfObjectifCa() throws EmployeException {
+    void testCalculPerformanceCas2CatraiteInfObjectifCa() throws EmployeException {
         Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
 
         employeService.calculPerformanceCommercial("C0002", 1l, 2l);
@@ -382,7 +382,7 @@ class EmployeServiceTest {
 
     ////TU cas 2
     @Test //caTraite >= objectifCa*0.8 (=0.8)
-    public void testCalculPerformanceCas2CatraiteSupObjectifCa() throws EmployeException {
+    void testCalculPerformanceCas2CatraiteSupObjectifCa() throws EmployeException {
         Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
 
         employeService.calculPerformanceCommercial("C0002", 1l, 1l);
@@ -394,7 +394,7 @@ class EmployeServiceTest {
 
     ////TU cas 2
     @Test //caTraite >= objectifCa*0.8 (=80) ET caTraite < objectifCa*0.95 (=95)
-    public void testCalculPerformanceCas2LeETDuIf() throws EmployeException {
+    void testCalculPerformanceCas2LeETDuIf() throws EmployeException {
         Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 1, 1.0));
 
         employeService.calculPerformanceCommercial("C0002", 90l, 100l);
@@ -407,7 +407,7 @@ class EmployeServiceTest {
 
     ////TU cas 3
     @Test //caTraite <= objectifCa*1.05 (=105)
-    public void testCalculPerformanceCas3CatraiteInfObjectifCa() throws EmployeException {
+    void testCalculPerformanceCas3CatraiteInfObjectifCa() throws EmployeException {
         Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
 
         employeService.calculPerformanceCommercial("C0002", 50l, 100l);
@@ -419,7 +419,7 @@ class EmployeServiceTest {
 
     ////TU cas 3
     @Test //caTraite >= objectifCa*0.95 (=95)
-    public void testCalculPerformanceCas3CatraiteSupObjectifCa() throws EmployeException {
+    void testCalculPerformanceCas3CatraiteSupObjectifCa() throws EmployeException {
         Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
 
         employeService.calculPerformanceCommercial("C0002", 120l, 100l);
@@ -431,7 +431,7 @@ class EmployeServiceTest {
 
     ////TU cas 3
     @Test //caTraite >= objectifCa*0.95 (=95) ET caTraite <= objectifCa*1.05 (=105)
-    public void testCalculPerformanceCas3LeETDuIf() throws EmployeException {
+    void testCalculPerformanceCas3LeETDuIf() throws EmployeException {
         Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
 
         employeService.calculPerformanceCommercial("C0002", 100l, 100l);
@@ -443,7 +443,7 @@ class EmployeServiceTest {
 
     ////TU cas 4
     @Test //caTraite <= objectifCa*1.2 (=120)
-    public void testCalculPerformanceCas4CatraiteInfObjectifCa() throws EmployeException {
+    void testCalculPerformanceCas4CatraiteInfObjectifCa() throws EmployeException {
         Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
 
         employeService.calculPerformanceCommercial("C0002", 50l, 100l);
@@ -455,7 +455,7 @@ class EmployeServiceTest {
 
     ////TU cas 4
     @Test //caTraite > objectifCa*1.05 (=105)
-    public void testCalculPerformanceCas4CatraiteSupObjectifCa() throws EmployeException {
+    void testCalculPerformanceCas4CatraiteSupObjectifCa() throws EmployeException {
         Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
 
         employeService.calculPerformanceCommercial("C0002", 130l, 100l);
@@ -467,7 +467,7 @@ class EmployeServiceTest {
 
     ////TU cas 4
     @Test //caTraite > objectifCa*1.05 (=105) ET caTraite <= objectifCa*1.2 (=120)
-    public void testCalculPerformanceCas4LeETDuIf() throws EmployeException {
+    void testCalculPerformanceCas4LeETDuIf() throws EmployeException {
         Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
 
         employeService.calculPerformanceCommercial("C0002", 110l, 100l);
@@ -479,7 +479,7 @@ class EmployeServiceTest {
 
     ////TU cas 5
     @Test //caTraite > objectifCa*1.2 (=120)
-    public void testCalculPerformanceCas5CatraiteSupObjectifCa() throws EmployeException {
+    void testCalculPerformanceCas5CatraiteSupObjectifCa() throws EmployeException {
         Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
 
         employeService.calculPerformanceCommercial("C0002", 150l, 100l);
@@ -493,7 +493,7 @@ class EmployeServiceTest {
 
     ////TU perf moyenne
     @Test //performanceMoyenne < perfmoy
-    public void testCalculPerformancePerformanceMoyenneInferieurPerfMoy() throws EmployeException {
+    void testCalculPerformancePerformanceMoyenneInferieurPerfMoy() throws EmployeException {
         Mockito.when(employeRepository.avgPerformanceWhereMatriculeStartsWith("C")).thenReturn(10.0);
         Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
 
@@ -506,7 +506,7 @@ class EmployeServiceTest {
 
     ////TU perf moyenne
     @Test //performanceMoyenne == null
-    public void testCalculPerformancePerformanceMoyenneNull() throws EmployeException {
+    void testCalculPerformancePerformanceMoyenneNull() throws EmployeException {
         Mockito.when(employeRepository.avgPerformanceWhereMatriculeStartsWith("C")).thenReturn(null);
         Mockito.when(employeRepository.findByMatricule("C0002")).thenReturn(new Employe("Doe", "Jane", "T00001", LocalDate.now(), 1500d, 2, 1.0));
 
