@@ -308,15 +308,23 @@ class EmployeServiceTest {
 
     ////TU objectifCa null
     @Test
-    public void testCalculPerformanceCommercialobjectifCaNull() throws EmployeException {
+    public void testCalculPerformanceCommercialObjectifCaNull() throws EmployeException {
         String matricule = "C00001";
         Long caTraite = 1l;
         Long objectifCa = null;
 
         Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial(matricule, caTraite,objectifCa)).hasMessage("L'objectif de chiffre d'affaire ne peut être négatif ou null !");
     }
-    
-    ////TU objectifCa 0
+
+    ////TU objectifCa < 0
+    @Test
+    public void testCalculPerformanceCommercialobjectifCaInferieurAZero() throws EmployeException {
+        String matricule = "C00001";
+        Long caTraite = 1l;
+        Long objectifCa = -2l;
+
+        Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial(matricule, caTraite,objectifCa)).hasMessage("L'objectif de chiffre d'affaire ne peut être négatif ou null !");
+    }
 
     ////TU employe == null
     @Test
