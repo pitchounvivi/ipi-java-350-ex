@@ -290,4 +290,21 @@ public class EmployeTest {
     }
 
 
+    //Test paramétré pour le NbRTT
+    @ParameterizedTest(name = "Année {0}, = Nombre de RTT {1}")
+    @CsvSource({
+            "'2019-01-01', 8", // (365 - 218 - 104 - 25 - 10 = 8) * 1 => un temps plein
+            "'2021-01-01', 10", // (365 - 218 - 104 - 25 - 7 = 11)
+            "'2022-01-01', 10", // (365 - 218 - 105 - 25 - 7 = 10)
+            "'2032-01-01', 11" // (366 - 218 - 104 - 25 - 7 = 12)
+    })
+    public void testGetNbRtt(LocalDate date, Integer nbRtt){
+        Employe employe = new Employe("Doe", "John", null,
+                LocalDate.now(), 1500d, 1, 1.0);
+
+        Integer nb = employe.getNbRtt(date);
+        Assertions.assertThat(nb).isEqualTo(nbRtt);
+    }
+
+
 }
