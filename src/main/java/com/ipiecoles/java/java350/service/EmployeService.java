@@ -113,6 +113,10 @@ public class EmployeService {
         if(matricule == null || !matricule.startsWith("C")){
             throw new EmployeException("Le matricule ne peut être null et doit commencer par un C !");
         }
+        calculPerformanceCommercialDeLEmploye(matricule, caTraite, objectifCa);
+    }
+
+    public void calculPerformanceCommercialDeLEmploye(String matricule, Long caTraite, Long objectifCa) throws EmployeException {
         //Recherche de l'employé dans la base
         Employe employe = employeRepository.findByMatricule(matricule);
         if(employe == null){
