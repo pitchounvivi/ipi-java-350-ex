@@ -28,7 +28,14 @@ class EmployeTest {
     @Test // un test basique
     void testGetNombreAnneeAncienneteAvecDateEmbaucheInférieurNow(){
         // Given
-        Employe employe = new Employe("Doe", "John", "T12345", LocalDate.now().minusYears(6), 1500d, 1, 1.0);
+        Employe employe = new Employe();
+        employe.setNom("Doe");
+        employe.setPrenom("John");
+        employe.setMatricule("T12345");
+        employe.setDateEmbauche(LocalDate.now().minusYears(6));
+        employe.setSalaire(1500d);
+        employe.setPerformance(1);
+        employe.setTempsPartiel(1.0);
 
         //When
         Integer anneeAnciennete = employe.getNombreAnneeAnciennete();
@@ -319,6 +326,20 @@ class EmployeTest {
 
         Integer nb = employe.getNbRtt(LocalDate.of(dateReference,1,1));
         Assertions.assertThat(nb).isEqualTo(nbRttAttendu);
+    }
+
+    //Ajoute d'un test pour augmenter la couverture
+    @Test
+    void testGetNbConges(){
+        // Given
+        Employe employe = new Employe();
+        employe.setDateEmbauche(LocalDate.now());
+
+        //When
+        Integer nb = employe.getNbConges();
+
+        //Then
+        Assertions.assertThat(nb).isEqualTo(25); //= nombre de congé de base
     }
 
 
