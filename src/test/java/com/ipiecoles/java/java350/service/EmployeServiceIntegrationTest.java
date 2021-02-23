@@ -2,6 +2,7 @@ package com.ipiecoles.java.java350.service;
 
 import com.ipiecoles.java.java350.exception.EmployeException;
 import com.ipiecoles.java.java350.model.Employe;
+import com.ipiecoles.java.java350.model.Entreprise;
 import com.ipiecoles.java.java350.model.NiveauEtude;
 import com.ipiecoles.java.java350.model.Poste;
 import com.ipiecoles.java.java350.repository.EmployeRepository;
@@ -60,10 +61,29 @@ class EmployeServiceIntegrationTest {
         Assertions.assertThat(employe.getMatricule()).isEqualTo("T00001");
     }
 
+    // On test un commercial qui a une performance = 2,
+    // mais qui a réussi ses objectifs (cas3: caTraite = objectifCa) sa performance reste la même (on n'a pas la performance de base)
+    @Test
+    void testCalculPerformanceCommercial() throws EmployeException{
+        //Given
+        String nom = "Doe";
+        String prenom = "John";
+        Double tempsPartiel = 1.0;
+        Integer performance = 2;
+        String matricule = "C00002";
 
+        //pour pouvoir tester ce TI de façon indépendante, j'ai dû faire un enregistrement indépendant de cet employe
+        Employe employe = new Employe(nom, prenom, matricule, LocalDate.now(), Entreprise.SALAIRE_BASE, performance, tempsPartiel);
+        employeRepository.save(employe);
 
+        employeService.calculPerformanceCommercial(matricule, 50l, 50l);
 
+        //Test d'intégration
+        employe = employeRepository.findByMatricule(matricule);
 
+        Assertions.assertThat(employe).isNotNull();
+        Assertions.assertThat(employe.getPerformance()).isEqualTo(2);
+    }
 
 
 }
