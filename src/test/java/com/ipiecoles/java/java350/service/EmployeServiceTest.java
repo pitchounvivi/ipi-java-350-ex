@@ -514,7 +514,6 @@ class EmployeServiceTest {
         ArgumentCaptor<Employe> employe = ArgumentCaptor.forClass(Employe.class);
 
         Mockito.verify(employeRepository, Mockito.times(1)).save(employe.capture());
-        Assertions.assertThat(employeRepository.avgPerformanceWhereMatriculeStartsWith("C")).isNull();
         Assertions.assertThat(employe.getValue().getPerformance()).isEqualTo(6);
     }
 

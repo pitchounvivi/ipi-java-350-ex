@@ -26,7 +26,7 @@ class EmployeTest {
     }
 
     @Test // un test basique
-    void testGetNombreAnneeAncienneteAvecDateEmbaucheInférieurNow(){
+    void testGetNombreAnneeAncienneteAvecDateEmbaucheInferieurNow(){
         // Given
         Employe employe = new Employe();
         employe.setNom("Doe");
@@ -46,7 +46,7 @@ class EmployeTest {
 
 
     @Test // un test basique
-    void testGetNombreAnneeAncienneteAvecDateEmbaucheSupérieurNow(){
+    void testGetNombreAnneeAncienneteAvecDateEmbaucheSuperieurNow(){
         // Given
         Employe employe = new Employe("Doe", "John", "T12345", LocalDate.now().plusYears(6), 1500d, 1, 1.0);
 
@@ -206,7 +206,7 @@ class EmployeTest {
     //pour nettoyer aller dans onglet maven
     //lifestyle
     //clean (supprime les anciens rapports)
-    //install (réinstalle le plugin, même si rouge faire un test pitest)
+    //install/compile (réinstalle le plugin, même si rouge faire un test pitest)
     //et relancer le plugin pitest ==> si tout ok message build ok
 
 
@@ -252,7 +252,7 @@ class EmployeTest {
 
     // TU : salaire = zéro traitement idem que si null
     @Test //entreprise.SALAIRE_BASE = 1521.22, augmentation 10% => 1673.342
-    void testAugmenterSalaireSiSalaireAZéroFaireCalculAvecUnSalaireBaseEntreprise() throws EmployeException{
+    void testAugmenterSalaireSiSalaireAZeroFaireCalculAvecUnSalaireBaseEntreprise() throws EmployeException{
         // Given
         Employe employe = new Employe();
         employe.setSalaire(0.0);
@@ -267,7 +267,7 @@ class EmployeTest {
 
     // TU : pourcentage = 0
     @Test //entreprise.SALAIRE_BASE = 1521.22
-    void testAugmenterSalaireSiPourcentageAZéro() throws EmployeException{
+    void testAugmenterSalaireSiPourcentageAZero() throws EmployeException{
         // Given
         Employe employe = new Employe();
         employe.setSalaire(null);
@@ -282,7 +282,7 @@ class EmployeTest {
 
     // TU : pourcentage = négatif => gestion d'une exception
     @Test //entreprise.SALAIRE_BASE = 1521.22, pourcentage -10% => 1369.098 ==> exception on peut pas faire une augmentation avec un % négatif
-    void testAugmenterSalaireSiPourcentageNégatif() throws EmployeException{
+    void testAugmenterSalaireSiPourcentageNegatif() throws EmployeException{
         // Given
         Employe employe = new Employe();
         employe.setSalaire(1000.0);
