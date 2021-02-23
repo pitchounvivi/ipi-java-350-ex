@@ -1,12 +1,14 @@
 package com.ipiecoles.java.java350.model;
 
+import com.ipiecoles.java.java350.exception.EmployeException;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.Locale;
 
 @Entity
 public class Employe {
@@ -62,22 +64,53 @@ public class Employe {
         return getNbRtt(LocalDate.now());
     }
 
-    public Integer getNbRtt(LocalDate d){
-        int i1 = d.isLeapYear() ? 365 : 366;
-        int var = 104;
-        switch (LocalDate.of(d.getYear(),1,1).getDayOfWeek()){
-            case THURSDAY: if(d.isLeapYear()) var =  var + 1;
+    /**
+     * Méthode permettant de calculer le Nb de jour dans une année (au prorata du temps d'activité) selon la formule :
+     * Nb jour RTT =
+     * Nombre de jours dans l'année
+     * - Nombre de jours travaillés dans l'année en plein temps
+     * - Nombre de samedi et dimanche dans l'année
+     * - Nombre de jours fériés ne tombant pas le week-end
+     * - Nombre de congés payés
+     *
+     * @param dateReference date à laquelle on calcule le Nb de RTT pour l'année
+     * @return Nombre de jour de RTT de l'employé au prorata du temps d'activité
+     */
+    public Integer getNbRtt(LocalDate dateReference) {
+        int nbJoursAnnee = dateReference.isLeapYear() ? 366 : 365;
+        int nbSamediDimanche = 104; //correspond aux nb de jours de week-end d'une année
+        switch (LocalDate.of(dateReference.getYear(), 1, 1).getDayOfWeek()) { //regarde le premier jour de l'année
+            case THURSDAY: //si c'est un jeudi
+                if (dateReference.isLeapYear()) {
+                    nbSamediDimanche = nbSamediDimanche + 1; //si année bissextille
+                }
                 break;
-            case FRIDAY:
-                if(d.isLeapYear()) var =  var + 2;
-                else var =  var + 1;
-            case SATURDAY:var = var + 1;
+            case FRIDAY: //si c'est un vendredi
+                if (dateReference.isLeapYear()) {
+                    nbSamediDimanche = nbSamediDimanche + 2; //cas année bissextille
+                } else {
+                    nbSamediDimanche = nbSamediDimanche + 1; //année normale
+                }
+                break;
+            case SATURDAY:
+                nbSamediDimanche = nbSamediDimanche + 1;
+                break;
+            default:
                 break;
         }
-        int monInt = (int) Entreprise.joursFeries(d).stream().filter(localDate ->
+
+        //nb de j fériée pour l'année en parametre et ça filtre en fonction de combien tombe en semaine
+        int nbJoursFeriesEnSemaine = (int) Entreprise.joursFeries(dateReference).stream().filter(localDate ->
                 localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
-        return (int) Math.ceil((i1 - Entreprise.NB_JOURS_MAX_FORFAIT - var - Entreprise.NB_CONGES_BASE - monInt) * tempsPartiel);
+        return (int) Math.ceil((
+                nbJoursAnnee
+                        - Entreprise.NB_JOURS_MAX_FORFAIT
+                        - nbSamediDimanche
+                        - Entreprise.NB_CONGES_BASE
+                        - nbJoursFeriesEnSemaine
+        ) * tempsPartiel);
     }
+
 
     /**
      * Calcul de la prime annuelle selon la règle :
@@ -115,7 +148,21 @@ public class Employe {
     }
 
     //Augmenter salaire
-    //public void augmenterSalaire(double pourcentage){}
+    public void augmenterSalaire(double pourcentage) throws EmployeException{
+        if (salaire == null || salaire == 0){
+            salaire = Entreprise.SALAIRE_BASE;
+        }
+
+        if (pourcentage < 0){
+            throw new EmployeException("ERREUR : le pourcentage est négatif");
+        }
+
+        this.salaire += this.getSalaire()*pourcentage;
+
+        //Arrondir à 2 chiffres après la virgule
+        String salaireString = String.format(Locale.ROOT,"%.2f",this.salaire);
+        this.salaire = Double.valueOf(salaireString);
+    }
 
     public Long getId() {
         return id;
@@ -211,26 +258,6 @@ public class Employe {
     public void setTempsPartiel(Double tempsPartiel) {
         this.tempsPartiel = tempsPartiel;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Employe)) return false;
-        Employe employe = (Employe) o;
-        return Objects.equals(id, employe.id) &&
-                Objects.equals(nom, employe.nom) &&
-                Objects.equals(prenom, employe.prenom) &&
-                Objects.equals(matricule, employe.matricule) &&
-                Objects.equals(dateEmbauche, employe.dateEmbauche) &&
-                Objects.equals(salaire, employe.salaire) &&
-                Objects.equals(performance, employe.performance);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nom, prenom, matricule, dateEmbauche, salaire, performance);
-    }
-
 
     @Override
     public String toString() {
