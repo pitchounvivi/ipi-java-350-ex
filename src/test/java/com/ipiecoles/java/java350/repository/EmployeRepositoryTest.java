@@ -103,6 +103,7 @@ class EmployeRepositoryTest {
         Assertions.assertThat(lastMatricule).isEqualTo("42345");
     }
 
+    //test que la méthode fait bien la moyenne que sur les commerciaux
     @Test
     void testAvgPerformanceEmployeWhereMatriculeWith()
     {
