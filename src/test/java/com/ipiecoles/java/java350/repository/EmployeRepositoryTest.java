@@ -103,4 +103,22 @@ class EmployeRepositoryTest {
         Assertions.assertThat(lastMatricule).isEqualTo("42345");
     }
 
+    @Test
+    void testAvgPerformanceEmployeWhereMatriculeWith()
+    {
+        //Given
+        employeRepository.save(new Employe("Doe", "John", "T12345", LocalDate.now(), 1500d, 10, 1.0));
+        employeRepository.save(new Employe("Doe", "J", "M42345", LocalDate.now(), 1500d, 5, 1.0));
+        employeRepository.save(new Employe("Doe", "Jan", "C2345", LocalDate.now(), 1500d, 1, 1.0));
+        employeRepository.save(new Employe("Doe", "Jim", "C01345", LocalDate.now(), 1500d, 3, 1.0));
+
+        //When
+        Double avgPreformance = employeRepository.avgPerformanceWhereMatriculeStartsWith("C");
+        //Then
+        Assertions.assertThat(avgPreformance).isEqualTo(2);
+    }
+
+
+
+
 }
